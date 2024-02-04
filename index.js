@@ -1,11 +1,11 @@
 import express from 'express'
 import morgan from 'morgan'
 import dotenv from 'dotenv'
+import { getData } from './utils/getData.js'
 
 dotenv.config()
 
 const app = express()
-
 const port = process.env.PORT || 3000
 
 // Config
@@ -24,6 +24,12 @@ app.get('/', (req, res) => {
     res.json({
         message: 'hello world',
     })
+})
+
+app.get('/movies', async (req, res) => {
+    const data = await getData()
+
+    res.json(data)
 })
 
 app.use((req, res) => {

@@ -1,0 +1,22 @@
+{
+    "name": "express-api",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "type": "module",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "dev": "nodemon src/index.js"
+    },
+    "author": "gotiergod",
+    "license": "ISC",
+    "devDependencies": {
+        "eslint": "^8.56.0",
+        "eslint-config-prettier": "^9.1.0",
+        "nodemon": "^3.0.3",
+        "prettier": "^3.2.4"
+    },
+    "dependencies": {
+        "express": "^4.18.2"
+    }
+}

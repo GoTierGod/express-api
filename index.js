@@ -29,7 +29,17 @@ app.get('/', (req, res) => {
 app.get('/movies', async (req, res) => {
     const data = await getData()
 
-    res.json(data)
+    const { genre } = req.query
+
+    if (genre) {
+        const filtered = data.filter((m) =>
+            m.Genre.toLowerCase().includes(genre.toLowerCase()),
+        )
+
+        return res.json(filtered)
+    }
+
+    return res.json(data)
 })
 
 app.get('/movies/:id', async (req, res) => {
@@ -43,7 +53,7 @@ app.get('/movies/:id', async (req, res) => {
 })
 
 app.use((req, res) => {
-    res.status(404).json({ message: 'not found' })
+    return res.status(404).json({ message: 'not found' })
 })
 
 app.listen(port, () => {

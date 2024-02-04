@@ -32,6 +32,16 @@ app.get('/movies', async (req, res) => {
     res.json(data)
 })
 
+app.get('/movies/:id', async (req, res) => {
+    const data = await getData()
+
+    const { id } = req.params
+    const movie = data.find((m) => m.id === Number(id))
+
+    if (movie) return res.json(movie)
+    return res.status(404).json({ message: 'Movie not found' })
+})
+
 app.use((req, res) => {
     res.status(404).json({ message: 'not found' })
 })

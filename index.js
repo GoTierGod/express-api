@@ -38,7 +38,6 @@ app.get('/', (req, res) => {
 })
 
 app.get('/movies', async (req, res) => {
-    console.log(req.headers)
     const data = await getData()
 
     const { genre } = req.query

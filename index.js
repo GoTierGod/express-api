@@ -4,6 +4,7 @@ import dotenv from 'dotenv'
 import { getData } from './utils/getData.js'
 import { validateMovie, validatePartialMovie } from './schemas/movie.js'
 import crypto from 'crypto'
+import cors from 'cors'
 
 dotenv.config()
 
@@ -20,6 +21,14 @@ app.set('strict routing', false)
 app.use(morgan('dev'))
 app.use(express.urlencoded({ extended: false }))
 app.use(express.json())
+app.use(
+    cors({
+        origin: 'http://localhost:3000/',
+        methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+        credentials: true,
+        optionsSuccessStatus: 204,
+    }),
+)
 
 // Get method
 app.get('/', (req, res) => {
@@ -29,6 +38,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/movies', async (req, res) => {
+    console.log(req.headers)
     const data = await getData()
 
     const { genre } = req.query

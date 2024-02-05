@@ -2,6 +2,8 @@ import express from 'express'
 import morgan from 'morgan'
 import dotenv from 'dotenv'
 import { getData } from './utils/getData.js'
+import { validateMovie } from './schemas/movie.js'
+import crypto from 'crypto'
 
 dotenv.config()
 
@@ -33,7 +35,7 @@ app.get('/movies', async (req, res) => {
 
     if (genre) {
         const filtered = data.filter((m) =>
-            m.Genre.toLowerCase().includes(genre.toLowerCase()),
+            m.genre.filter((g) => g.toLowerCase() === genre.toLowerCase()),
         )
 
         return res.json(filtered)
@@ -46,10 +48,30 @@ app.get('/movies/:id', async (req, res) => {
     const data = await getData()
 
     const { id } = req.params
-    const movie = data.find((m) => m.id === Number(id))
+    const movie = data.find((m) => m.id === id)
 
     if (movie) return res.json(movie)
     return res.status(404).json({ message: 'Movie not found' })
+})
+
+app.post('/movies', async (req, res) => {
+    const result = validateMovie(req.body)
+
+    if (result.error) {
+        return res
+            .status(400)
+            .json({ message: JSON.parse(result.error.message) })
+    }
+
+    const newMovie = {
+        id: crypto.randomUUID(),
+        ...result.data,
+    }
+
+    // Save in the database
+    // . . .
+
+    return res.status(201).json(newMovie)
 })
 
 app.use((req, res) => {

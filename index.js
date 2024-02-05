@@ -2,7 +2,7 @@ import express from 'express'
 import morgan from 'morgan'
 import dotenv from 'dotenv'
 import { getData } from './utils/getData.js'
-import { validateMovie } from './schemas/movie.js'
+import { validateMovie, validatePartialMovie } from './schemas/movie.js'
 import crypto from 'crypto'
 
 dotenv.config()
@@ -72,6 +72,31 @@ app.post('/movies', async (req, res) => {
     // . . .
 
     return res.status(201).json(newMovie)
+})
+
+app.patch('/movies/:id', async (req, res) => {
+    const result = validatePartialMovie(req.body)
+
+    if (result.error) {
+        return res
+            .status(400)
+            .json({ message: JSON.parse(result.error.message) })
+    }
+
+    const data = await getData()
+
+    const { id } = req.params
+    const movie = data.find((m) => m.id === id)
+
+    const newMovie = {
+        ...movie,
+        ...result.data,
+    }
+
+    // Update movie in the database
+    // . . .
+
+    return res.json(newMovie)
 })
 
 app.use((req, res) => {

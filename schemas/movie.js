@@ -9,7 +9,7 @@ const movieSchema = z.object({
         .max(250),
     year: z.number().int().min(1900).max(2024),
     rated: z.enum(['PG-13', 'R', 'TV-MA', 'TV-14', 'N/A']),
-    released: z.string().length(7),
+    released: z.string().length(11),
     runtime: z.number().min(1).max(300),
     genre: z.array(
         z.enum([
@@ -46,7 +46,7 @@ const movieSchema = z.object({
         z.enum(['USA', 'UK', 'Ireland', 'Canada', 'France', 'Hong Kong']),
     ),
     awards: z.string().max(500),
-    poster: z.string().url().startsWith('https').endsWith(['']),
+    poster: z.string().url(),
     metascore: z.number(),
     imdbrating: z.number(),
     imdbvotes: z.number(),

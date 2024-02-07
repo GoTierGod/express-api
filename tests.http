@@ -1,0 +1,59 @@
+### Get all movies
+GET http://localhost:3000/movies/
+
+### Get a movie by id
+GET http://localhost:3000/movies/cfd344e3-a8b7-408a-aa2f-faa73c9ed23f
+
+### Get all movies by genre
+GET http://localhost:3000/movies?genre=Action
+
+### Create a movie
+POST http://localhost:3000/movies
+Content-Type: application/json
+
+{
+    "title": "The Matrix",
+    "year": 1999,
+    "rated": "R",
+    "released": "31 Mar 1999",
+    "runtime": 136,
+    "genre": ["Action", "Sci-Fi"],
+    "director": ["Lana Wachowski", "Lilly Wachowski"],
+    "writer": ["Lana Wachowski", "Lilly Wachowski"],
+    "actors": [
+        "Keanu Reeves",
+        "Laurence Fishburne",
+        "Carrie-Anne Moss",
+        "Hugo Weaving"
+    ],
+    "plot": "A computer hacker learns about the true nature of his reality and his role in the war against its controllers.",
+    "language": ["English"],
+    "country": ["USA"],
+    "awards": "Won 4 Oscars. Another 34 wins & 48 nominations.",
+    "poster": "http://ia.media-imdb.com/images/M/MV5BN2EyZjM3NzUtOThhZC00YTIxLWE0ZDctMzE5NzBmODM2YmFmXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX300.jpg",
+    "metascore": 73,
+    "imdbrating": 8.7,
+    "imdbvotes": 1706114,
+    "imdbid": "tt0133093",
+    "type": "movie",
+    "response": true,
+    "images": [
+        "https://images-na.ssl-images-amazon.com/images/M/MV5BN2EyZjM3NzUtOThhZC00YTIxLWE0ZDctMzE5NzBmODM2YmFmXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX1500_CR0,0,1500,999_AL_.jpg",
+        "https://images-na.ssl-images-amazon.com/images/M/MV5BN2EyZjM3NzUtOThhZC00YTIxLWE0ZDctMzE5NzBmODM2YmFmXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX1777_CR0,0,1777,999_AL_.jpg",
+        "https://images-na.ssl-images-amazon.com/images/M/MV5BN2EyZjM3NzUtOThhZC00YTIxLWE0ZDctMzE5NzBmODM2YmFmXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX1777_CR0,0,1777,999_AL_.jpg",
+        "https://images-na.ssl-images-amazon.com/images/M/MV5BN2EyZjM3NzUtOThhZC00YTIxLWE0ZDctMzE5NzBmODM2YmFmXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX1777_CR0,0,1777,999_AL_.jpg",
+        "https://images-na.ssl-images-amazon.com/images/M/MV5BN2EyZjM3NzUtOThhZC00YTIxLWE0ZDctMzE5NzBmODM2YmFmXkEyXkFqcGdeQXVyNjU0OTQ0OTY@._V1_SX1777_CR0,0,1777,999_AL_.jpg"
+    ]
+}
+
+### Partially update a movie
+PATCH  http://localhost:3000/movies/cfd344e3-a8b7-408a-aa2f-faa73c9ed23f
+Content-Type: application/json
+
+{
+    "title": "Avatar 2",
+    "year": 2010
+}
+
+### Delete a movie
+DELETE http://localhost:3000/movies/cfd344e3-a8b7-408a-aa2f-faa73c9ed23f

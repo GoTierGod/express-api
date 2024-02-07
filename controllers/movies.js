@@ -10,7 +10,8 @@ export class movieController {
     }
 
     static async getById(req, res) {
-        const { id } = req.query
+        const { id } = req.params
+        console.log(id)
         const movie = await movieModel.getById({ id })
 
         if (movie) {

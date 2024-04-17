@@ -15,7 +15,7 @@ export class movieModel {
     }
 
     static async getById({ id }) {
-        const movie = movies.find((m) => m.id === id)
+        const movie = movies.find((m) => m.id === Number(id))
         return movie
     }
 
@@ -31,7 +31,7 @@ export class movieModel {
     }
 
     static async delete({ id }) {
-        const movieIdx = movies.findIndex((movie) => movie.id === id)
+        const movieIdx = movies.findIndex((movie) => movie.id === Number(id))
         if (movieIdx === -1) return false
 
         movies.splice(movieIdx, 1)
@@ -39,7 +39,7 @@ export class movieModel {
     }
 
     static async update({ id, input }) {
-        const movieIdx = movies.findIndex((movie) => movie.id === id)
+        const movieIdx = movies.findIndex((movie) => movie.id === Number(id))
         if (movieIdx === -1) return false
 
         movies[movieIdx] = {

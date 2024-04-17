@@ -24,6 +24,13 @@ app.use(corsMiddleware)
 app.get('/', (req, res) => {
     res.json({
         message: 'Express REST API',
+        routes: [
+            'GET /movies/',
+            'GET /movies/:id',
+            'POST /movies/',
+            'DELETE /movies/:id',
+            'PATCH /movies/:id',
+        ],
     })
 })
 
